@@ -1,0 +1,105 @@
+Conteúdo mais profundo sobre testes
+
+
+
+Cenário:
+
+Descreva quais testes você faria para o método abaixo.
+
+
+public boolean aceitaPalavra(String str){
+
+  if(str == null || str.length() < 5){
+
+     return false;
+
+  }
+
+
+  char primeiroCaractere = str.charAt(0);
+
+  int tamanho = str.length();
+
+
+ if (Character.isLetter(primeiroCaractere)
+
+        && (ultimoCaractere == 's' || tamanho >= 10)) {
+
+        return true;
+
+  } else {
+
+    return false;
+
+  }
+
+}
+
+
+
+
+
+O que seria bom ver nessa resposta?
+
+
+
+Peso 6: Quatro testes ou mais por conta da utilização do MC/DC ou Path Coverage com técnica de cobertura.
+Peso 2: Utilização do valor 5 e 4 para testar os valores no segundo if
+Peso 2: Utilização dos valores 9 e 10 por conta do boundary testing no segundo if
+
+Resposta do Especialista:
+
+Para o primeiro if
+Já pensei que teria que fazer 3 testes. Por conta do MC/DC
+Um teste com string nula
+Um teste com string de 4 caracteres
+Um teste com string de 5 caracteres
+Para o segundo if
+Já pensei que teria que fazer 4 testes. Por conta do MC/DC
+Montei a tabela verdade com as condições
+Preciso descobrir os pares que me permitem inverter o resultado de uma das condições e que afete o resultado da expressão como um todo
+
+Tests        a          b         c          resultado
+
+1        T        T        T        T                    
+
+2        T        T        F        T                    
+
+3        T        F        T        T                    
+
+4        T        F        F        F                    
+
+5        F        T        T        F                    
+
+6        F        T        F        F                    
+
+7        F        F        T        F
+
+8        F        F        F        F
+
+
+ a -> (1,5),(2,6),(3,7) -> altero só o a e muda o resultado da expressão
+
+ b -> (2,4) -> altero só o b e muda o resultado da expressão
+
+ c -> (3,4)  -> altero só o c e muda o resultado da expressão
+
+
+  Possíveis resultados:
+
+
+2,3,4,6
+3,7,2,4
+1,5,2,4,3 (tem mais testes do que precisa para o mc/dc)
+
+Testes derivados usando a combinação de MC/DC e boundary testing.
+
+
+2 - Palavra começando com letra, terminando com s e com tamanho 9
+
+3 - Palavra começando com letra, terminando com y e com tamanho 10
+
+4 - Palavra começando com letra, terminando com y e com tamanho 9
+
+6 - Palavra começando com número, terminando com s e com tamanho 9
+
